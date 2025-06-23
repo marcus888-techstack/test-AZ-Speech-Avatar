@@ -1,101 +1,202 @@
-# Azure Avatar Demo Application
+# Azure Speech Avatar Demo
 
-A simple React + Express application demonstrating Azure Avatar text-to-speech capabilities with visual avatar representation.
+A React + Express application demonstrating Azure Speech Services Avatar capabilities with real-time text-to-speech synthesis and visual avatar representation using WebRTC.
 
-## Prerequisites
+## 🚀 Features
+
+- **Real-time Avatar Synthesis**: Visual avatar with synchronized lip movements
+- **WebRTC Integration**: Low-latency streaming of avatar video and audio
+- **Chat Interface**: Interactive conversation with message history
+- **Azure Speech Services**: Powered by Azure Cognitive Services
+- **TypeScript Support**: Full type safety for both frontend and backend
+
+## 📋 Prerequisites
 
 - Node.js (v18+)
-- npm
-- Azure Speech Services subscription
+- npm or yarn
+- Azure Speech Services subscription (Standard S0 tier required for Avatar)
+- Modern browser with WebRTC support (Chrome, Edge, Firefox, Safari)
 
-## Project Structure
+## 🏗️ Project Structure
 
 ```
 test-AZ-speech/
-├── backend/          # Express server
+├── backend/                 # Express.js server
 │   ├── src/
-│   │   └── index.ts  # Main server file
+│   │   └── index.ts        # Main server file with API endpoints
+│   ├── dist/               # Compiled JavaScript
 │   ├── package.json
-│   └── .env          # Azure credentials
-└── frontend/         # React application
+│   ├── tsconfig.json
+│   └── .env.example        # Example environment variables
+│
+└── frontend/               # React application
     ├── src/
-    │   ├── App.tsx   # Main component
-    │   └── App.css   # Styles
+    │   ├── App.tsx        # Main component with avatar logic
+    │   ├── App.css        # Styling
+    │   └── index.tsx      # Entry point
+    ├── public/
     └── package.json
 ```
 
-## Setup Instructions
+## 🔧 Installation
 
-### 1. Backend Setup
+### 1. Clone the repository
+
+```bash
+git clone git@github.com:marcus888-techstack/test-AZ-Speech-Avatar.git
+cd test-AZ-Speech-Avatar
+```
+
+### 2. Backend Setup
 
 ```bash
 cd backend
 npm install
+
+# Copy the example environment file
+cp .env.example .env
 ```
 
-Ensure the `.env` file contains your Azure credentials:
-```
-AZ_SPEECH_KEY=your_azure_speech_key
-AZ_SPEECH_REGION=your_region
-PORT=3001
+Edit `.env` with your Azure credentials:
+```env
+AZ_SPEECH_KEY=your_azure_speech_key_here
+AZ_SPEECH_REGION=your_azure_region_here
+PORT=3000
 ```
 
-### 2. Frontend Setup
+### 3. Frontend Setup
 
 ```bash
-cd frontend
+cd ../frontend
 npm install
 ```
 
-## Running the Application
+## 🚀 Running the Application
 
-### Start Backend Server
+### Development Mode
 
+1. **Start the backend server:**
 ```bash
 cd backend
 npm run dev
 ```
+The server will run on http://localhost:3000
 
-The backend will run on http://localhost:3001
-
-### Start Frontend Application
-
-In a new terminal:
-
+2. **Start the frontend (in a new terminal):**
 ```bash
 cd frontend
 npm start
 ```
+The application will open at http://localhost:3000
 
-The frontend will run on http://localhost:3000
+### Production Build
 
-## How to Use
+1. **Build the backend:**
+```bash
+cd backend
+npm run build
+npm start
+```
 
-1. Open http://localhost:3000 in your browser
-2. Type a message in the input field
-3. Click "Send" or press Enter
-4. The avatar will appear and speak your message
-5. Continue the conversation by sending more messages
+2. **Build the frontend:**
+```bash
+cd frontend
+npm run build
+```
+Serve the `build` folder with any static file server.
 
-## Features
+## 💡 Usage
 
-- Text input chat interface
-- Azure Avatar visual representation with WebRTC
-- Real-time speech synthesis with lip-sync
-- Message history display
-- Loading states and error handling
-- ICE server configuration for WebRTC connectivity
+1. Open the application in your browser
+2. Wait for the avatar to initialize (you'll see "Initializing avatar...")
+3. Type a message in the chat input
+4. Press Enter or click Send
+5. The avatar will appear and speak your message with synchronized lip movements
+6. Continue the conversation!
 
-## Troubleshooting
+## 🔌 API Endpoints
 
-- If the avatar doesn't appear, check the browser console for errors
-- Ensure Azure credentials are correctly set in the backend `.env` file
-- Make sure both backend and frontend servers are running
-- Check that CORS is properly configured if accessing from a different domain
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/health` | GET | Health check endpoint |
+| `/api/speech/token` | GET | Get Azure Speech token and region |
+| `/api/speech/ice-token` | GET | Get ICE server configuration for WebRTC |
+| `/api/speech/synthesize` | POST | Optional: Server-side speech synthesis |
 
-## API Endpoints
+## 🛠️ Configuration
 
-- `GET /api/health` - Health check
-- `GET /api/speech/token` - Get Azure Speech token and region
-- `GET /api/speech/ice-token` - Get ICE server configuration for WebRTC
-- `POST /api/speech/synthesize` - Synthesize speech (optional)
+### Azure Speech Services
+
+1. Create an Azure Speech Services resource in the [Azure Portal](https://portal.azure.com)
+2. Select **Standard S0** pricing tier (required for Avatar)
+3. Copy your key and region
+4. Add them to the backend `.env` file
+
+### Supported Avatar Characters
+
+- **lisa** (default)
+- **jason**
+- And more available in Azure documentation
+
+### Supported Avatar Styles
+
+- **casual-sitting** (default)
+- **technical-standing**
+- **business-standing**
+- And more available in Azure documentation
+
+## 🐛 Troubleshooting
+
+### Avatar doesn't appear
+
+1. Check browser console for errors
+2. Verify Azure credentials in `.env`
+3. Ensure you're using Standard S0 pricing tier
+4. Check if your region supports Avatar feature
+
+### Connection errors
+
+1. Ensure both backend and frontend are running
+2. Check CORS configuration
+3. Verify firewall settings allow WebRTC connections
+
+### No audio/video
+
+1. Check browser permissions for audio/video
+2. Ensure WebRTC is supported in your browser
+3. Try using a different browser
+
+## 🔒 Security Notes
+
+- Never commit `.env` files with real credentials
+- Use environment variables for production deployments
+- Consider implementing authentication for production use
+- Use HTTPS in production for WebRTC security
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📝 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🙏 Acknowledgments
+
+- Azure Speech Services team for the Avatar API
+- Microsoft Cognitive Services Speech SDK
+- React and Express.js communities
+
+## 📚 Resources
+
+- [Azure Speech Services Documentation](https://docs.microsoft.com/azure/cognitive-services/speech-service/)
+- [Speech SDK JavaScript Reference](https://docs.microsoft.com/javascript/api/microsoft-cognitiveservices-speech-sdk/)
+- [Azure Avatar Documentation](https://docs.microsoft.com/azure/cognitive-services/speech-service/text-to-speech-avatar)
+
+---
+
+Built with ❤️ using React, Express, and Azure Speech Services
